@@ -1,5 +1,6 @@
 <?php
 
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
@@ -28,15 +29,18 @@ Route::post('/Register', [RegisterController::class, 'store'])->name('register.s
 
 Route::get('/Login', [LoginController::class, 'create'])->name('login.create');
 Route::post('/Login', [LoginController::class, 'store'])->name('login.store');
-
+ Route::post('/logout', [SiswaController::class, 'logout'])->name('logout');
 
 Route::get('/Dashboard', [DashboardController::class,'index'])->name('dashboard.index');
 
 
 
-Route::get('/siswa/dashboard', [SiswaController::class, 'dashboard'])
-    ->name('siswa.dashboard')
-    ->middleware(['auth', 'role:siswa']);
+Route::middleware(['auth', 'role:siswa'])->prefix('siswa')->name('siswa.')->group(function () {
+    Route::get('/dashboard', [SiswaController::class, 'dashboard'])->name('dashboard');
+    Route::post('/store', [SiswaController::class, 'store'])->name('store');
+
+});
+
 
 Route::get('/guru/dashboard', [GuruController::class, 'dashboard'])
     ->name('guru.dashboard')
