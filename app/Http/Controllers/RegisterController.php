@@ -47,7 +47,7 @@ class RegisterController extends Controller
         $user->assignRole('siswa');
 
         // Cek apakah role 'siswa' benar-benar terdaftar
-        dd($user->hasRole('siswa')); // Output: true jika role siswa terdaftar, false jika tidak
+         // Output: true jika role siswa terdaftar, false jika tidak
 
         // Redirect atau beri notifikasi
         return redirect()->route('register.create')->with('success', 'Registrasi berhasil!');
