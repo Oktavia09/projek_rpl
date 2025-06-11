@@ -34,7 +34,7 @@ class SiswaController extends Controller
             'alamat' => 'required|string',
             'tanggal_lahir' => 'required|date|before:today',
             'tempat_lahir' => 'required|string|max:50',
-            'jenis_kelamin' => 'required|in:L,P',
+            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
             'nomor_telepon' => 'required|string|max:15',
             'nama_orang_tua' => 'required|string|max:100',
             'pekerjaan_orang_tua' => 'required|string|max:50',

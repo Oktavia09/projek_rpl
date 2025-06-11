@@ -36,10 +36,7 @@ class RolePermissionSeeder extends Seeder
                 'beri nilai tugas siswa',
                 'kelola nilai akademik siswa',
                 'buat pengumuman kelas',
-                'komunikasi dengan siswa',
-                'komunikasi dengan orang tua',
                 'akses forum guru',
-                'ikut pelatihan profesional',
             ],
             'admin' => [
                 'kelola data siswa',
@@ -51,9 +48,6 @@ class RolePermissionSeeder extends Seeder
                 'atur pembayaran administrasi',
                 'verifikasi pembayaran',
                 'atur jadwal akademik',
-                'atur kalender kegiatan',
-                'lihat laporan statistik',
-                'evaluasi kinerja akademik',
             ],
         ];
 

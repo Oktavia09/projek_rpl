@@ -221,16 +221,15 @@
 
                                             <div class="col-md-6 mb-3">
                                                 <label for="jenis_kelamin" class="form-label">Jenis Kelamin *</label>
-                                                <select name="jenis_kelamin" id="jenis_kelamin" class="form-select"
-                                                    required>
-                                                    <option value="">Pilih Jenis Kelamin</option>
-                                                    <option value="L"
-                                                        {{ old('jenis_kelamin') == 'L' ? 'selected' : '' }}>Laki-laki
-                                                    </option>
-                                                    <option value="P"
-                                                        {{ old('jenis_kelamin') == 'P' ? 'selected' : '' }}>Perempuan
-                                                    </option>
+                                                <select name="jenis_kelamin" class="form-control" required>
+                                                    <option value="Laki-laki"
+                                                        {{ old('jenis_kelamin') == 'Laki-laki' ? 'selected' : '' }}>
+                                                        Laki-Laki</option>
+                                                    <option value="Perempuan"
+                                                        {{ old('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>
+                                                        Perempuan</option>
                                                 </select>
+o
                                             </div>
 
                                             <div class="col-md-6 mb-3">
