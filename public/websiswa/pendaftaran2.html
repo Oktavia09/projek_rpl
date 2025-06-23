@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SISMADU</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        font-size: 14px;
+      }
+      .navbar {
+        background-color: #b2a496;
+      }
+
+      .dropdown-menu {
+        background-color: #f1f1f1;
+      }
+
+      .dropdown-menu .dropdown-item:hover {
+        background-color: #886e58;
+        color: #f1f1f1;
+      }
+
+      body {
+        background-color: #f1f1f1;
+      }
+
+      h3 {
+        color: #b2a496;
+      }
+
+      .form-container {
+        max-width: 950px;
+        margin: auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        color: #000;
+      }
+
+      .form-control, textarea {
+        background-color: #f8f9fa;
+        color: #000;
+      }
+
+      .input-submit {
+        width: 100%;
+        padding: 12px;
+        background-color: #b2a496;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .input-submit:hover {
+        background-color: #886e58;
+      }
+
+      .navbar {
+        background-color: #b2a496;
+      }
+
+      .navbar-nav .nav-item {
+        position: relative;
+      }
+
+      .navbar-nav .nav-link {
+        color: white;
+        display: block;
+      }
+
+      .navbar-nav .nav-link:hover {
+        background-color: #886e58;
+        color: white;
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar">
+      <div class="container-fluid">
+        <a class="navbar-brand text-white fw-bold ms-4" href="#">SISMADU</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </div>
+      <div class="d-flex ms-auto me-4">
+        <div class="nav-item nav-link text-white" style="cursor:pointer;" onclick="logout()">Logout</div>
+      </div>
+    </nav>
+
+    <div class="wrapper">
+        <h3 class="pt-5 text-center fw-bold mb-5">FORMULIR PENDAFTARAN</h3>
+        <div class="form-container py-5">
+          <form>
+            <h3 class="fw-bold mb-3">Isi Biodata</h3>
+            <div class="row">
+              <!-- Kolom Kiri -->
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="nama" class="form-label">Nama Lengkap</label>
+                  <input type="text" class="form-control" id="nama" placeholder="Nama Lengkap">
+                </div>
+
+                <div class="mb-3">
+                  <label for="tempat" class="form-label">Tempat Lahir</label>
+                  <input type="text" class="form-control" id="tempat" placeholder="Tempat Lahir">
+                </div>
+
+                <div class="mb-3">
+                  <label for="tanggal" class="form-label">Tanggal Lahir</label>
+                  <input type="date" class="form-control" id="tanggal">
+                </div>
+
+                <div class="mb-3">
+                  <label for="nisn" class="form-label">NISN</label>
+                  <input type="text" class="form-control" id="nisn" placeholder="Nisn">
+                </div>
+              </div>
+
+              <!-- Kolom Kanan -->
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="jenisKelamin" class="form-label">Jenis Kelamin</label>
+                  <select class="form-select" id="jenisKelamin">
+                    <option selected disabled>Pilih Jenis Kelamin</option>
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label for="asalSekolah" class="form-label">Asal Sekolah</label>
+                  <input type="text" class="form-control" id="asalSekolah" placeholder="Asal Sekolah">
+                </div>
+
+                <div class="mb-3">
+                  <label for="telepon" class="form-label">No. Telepon</label>
+                  <input type="tel" class="form-control" id="telepon" placeholder="No. Telepon">
+                </div>
+
+                <div class="mb-3">
+                  <label for="alamat" class="form-label">Alamat</label>
+                  <textarea class="form-control" id="alamat" rows="3" placeholder="Alamat Lengkap"></textarea>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Input Nilai Per Mata Pelajaran -->
+            <div class="form-container card mt-3 mb-5">
+              <h3 class="fw-bold mb-3">Input Nilai Rapor</h3>
+
+               <!-- Upload Rapor -->
+              <div class="row mt-">
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label for="aktaKelahiran" class="form-label">Upload Foto Rapor</label>
+                    <input type="file" class="form-control" id="aktaKelahiran" accept=".pdf,.jpg,.jpeg,.png" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="nilaiMM" class="form-label">Nilai Matematika</label>
+                <input type="number" class="form-control" id="nilaiMM" placeholder="Contoh: 85">
+              </div>
+
+              <div class="mb-3">
+                <label for="nilaiIPA" class="form-label">Nilai IPA</label>
+                <input type="number" class="form-control" id="nilaiIPA" placeholder="Contoh: 88">
+              </div>
+
+              <div class="mb-3">
+                <label for="nilaiIPS" class="form-label">Nilai IPS</label>
+                <input type="number" class="form-control" id="nilaiIPS" placeholder="Contoh: 82">
+              </div>
+
+              <div class="mb-3">
+                <label for="nilaiBindo" class="form-label">Nilai Bahasa Indonesia</label>
+                <input type="number" class="form-control" id="nilaiBindo" placeholder="Contoh: 90">
+              </div>
+
+              <div class="mb-3">
+                <label for="nilaiBing" class="form-label">Nilai Bahasa Inggris</label>
+                <input type="number" class="form-control" id="nilaiBing" placeholder="Contoh: 87">
+              </div>
+            </div>
+
+            <div class="form-container card mb-5">
+                <h3 class="fw-bold mb-3">Penetapan</h3>
+
+                <!-- Rekap Biodata -->
+                <p>Nama Lengkap: <span id="rekapNama"></span></p>
+                <p>Tempat Lahir: <span id="rekapTempat"></span></p>
+                <p>Tanggal Lahir: <span id="rekapTanggal"></span></p>
+                <p>NISN: <span id="rekapNisn"></span></p>
+                <p>Jenis Kelamin: <span id="rekapJK"></span></p>
+                <p>Asal Sekolah: <span id="rekapSekolah"></span></p>
+                <p>No. Telepon: <span id="rekapTelepon"></span></p>
+                <p>Alamat: <span id="rekapAlamat"></span></p>
+
+                <!-- Status Pendaftaran -->
+                <p class="mt-5 fs-5">
+                    Status Anda: <span class="badge bg-success">DITERIMA</span>
+                  </p>
+                  <p class="text-muted">Selamat! Anda telah <strong>diterima</strong> sebagai siswa baru. Silakan selesaikan daftar ulang sebelum <strong>Juni 2025</strong>.</p>
+                  <p class="text-muted">Untuk mengakses dashboard siswa Anda, silakan klik <a href= "dasboardSiswa" >Dashboard Siswa</a></p>
+
+            <!-- Tombol Submit -->
+            <div class="text-center">
+              <button type="submit" class="input-submit">Kirim Formulir</button>
+            </div>
+
+          </form>
+        </div>
+    </div>
+
+
+
+
+    <div class="text-center p-3" style="background-color: #b2a496;">
+    © 2025 <strong>SISMADU</strong> - All rights reserved.
+    </div>
+
+    <script>
+    function logout() {
+        window.location.href = "login.html";
+    }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+  </body>
+</html>

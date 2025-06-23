@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SISMADU</title>
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f1f1f1;
+        padding-top: 30px;
+      }
+   
+
+      .wrapper {
+        background: #fff;
+        padding: 40px 30px;
+        border-radius: 16px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+        width: 100%;
+        max-width: 400px;
+      }
+
+
+      .logo-img {
+        max-width: 280px; 
+        height: auto;   
+      }
+      
+      .login-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 400px;
+      }
+      
+  
+      .login-header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .login-header span {
+        font-size: 24px;
+        font-weight: bold;
+        color: #b2a496;
+      }
+
+      .input_box {
+        position: relative;
+        margin-bottom: 20px;
+      }
+
+      .input-field {
+        width: 100%;
+        padding: 12px 40px 12px 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+      }
+
+      .label {
+        position: absolute;
+        top: -10px;
+        left: 12px;
+        background: #fff;
+        padding: 0 4px;
+        font-size: 14px;
+
+      }
+
+      .icon {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 18px;
+      }
+
+      .remember {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        font-size: 14px;
+      }
+
+
+      .input-submit {
+        width: 100%;
+        padding: 12px;
+        background-color: #b2a496;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .input-submit:hover {
+        background-color: #886e58;
+      }
+
+      p {
+        text-align: center;
+        margin-top: 15px;
+        font-size: 14px;
+      }
+
+      .logo-text {
+        font-size: 18px;
+        color: #886e58;
+        margin-bottom: 10px; 
+        text-align: center;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <img src="logoSismadu.png" alt="Logo Sekolah" class="logo-img">
+      <p class="logo-text">Sistem Informasi Smart Education</p>
+    <div class="wrapper">
+      <div class="login_box">
+        <div class="login-header">
+          <span>Login</span>
+        </div>
+
+        <div class="input_box">
+          <input type="text" id="user" class="input-field" required>
+          <label for="user" class="label">Username</label>
+          <i class="bx bx-user icon"></i>
+        </div>
+
+        <div class="input_box">
+          <input type="password" id="pass" class="input-field" required>
+          <label for="pass" class="label">Password</label>
+          <i class="bx bx-lock-alt icon"></i>
+        </div>
+
+        <div class="remember">
+          <div class="remember-me">
+            <input type="checkbox" id="remember">
+            <label for="remember">Remember me</label>
+          </div>
+        </div>
+
+        <div class="input_box">
+          <input type="submit" class="input-submit" value="Login">
+        </div>
+      </div>
+      <p>Belum punya akun? <a href="register2.html">Register</a></p>
+    </div>
+  </body>
+</html>

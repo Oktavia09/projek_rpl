@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard Guru - SISMADU</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f1f1f1;
+      font-family: sans-serif;
+    }
+    .navbar {
+      background-color: #886e58;
+    }
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+    .card {
+      border: none;
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .card-title {
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .card-body {
+      background-color: #ffffff;
+    }
+    .card-icon {
+      font-size: 30px;
+      color: #886e58;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white fw-bold ms-5" href="#">SISMADU</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto me-5">
+          <li class="nav-item"><a class="nav-link text-white" href="#">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#">Profil</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#">Keluar</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-container">
+    <h4 class="fw-bold mb-4">Menu Utama Guru</h4>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card shadow-sm">
+          <div class="card-body text-center">
+            <div class="card-icon mb-2">📅</div>
+            <div class="card-title">Atur Jadwal</div>
+            <a href="jadwal.html" class="btn btn-outline-secondary btn-sm mt-2">Masuk</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm">
+          <div class="card-body text-center">
+            <div class="card-icon mb-2">📚</div>
+            <div class="card-title">Unggah Materi</div>
+            <a href="materi.html" class="btn btn-outline-secondary btn-sm mt-2">Masuk</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm">
+          <div class="card-body text-center">
+            <div class="card-icon mb-2">📝</div>
+            <div class="card-title">Buat Tugas</div>
+            <a href="#" class="btn btn-outline-secondary btn-sm mt-2">Masuk</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm">
+          <div class="card-body text-center">
+            <div class="card-icon mb-2">✅</div>
+            <div class="card-title">Nilai Tugas</div>
+            <a href="#" class="btn btn-outline-secondary btn-sm mt-2">Masuk</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm">
+          <div class="card-body text-center">
+            <div class="card-icon mb-2">📊</div>
+            <div class="card-title">Nilai Akademik</div>
+            <a href="#" class="btn btn-outline-secondary btn-sm mt-2">Masuk</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm">
+          <div class="card-body text-center">
+            <div class="card-icon mb-2">📢</div>
+            <div class="card-title">Pengumuman Kelas</div>
+            <a href="#" class="btn btn-outline-secondary btn-sm mt-2">Masuk</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm">
+          <div class="card-body text-center">
+            <div class="card-icon mb-2">💬</div>
+            <div class="card-title">Forum Guru</div>
+            <a href="#" class="btn btn-outline-secondary btn-sm mt-2">Masuk</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabel Perhitungan Regresi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e8f5e8;
+        }
+        .sum-row {
+            background-color: #ffeb3b !important;
+            font-weight: bold;
+            color: #333;
+        }
+        .sum-row td {
+            border: 2px solid #ff9800;
+        }
+        .note {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            border-left: 4px solid #2196f3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tabel Perhitungan untuk Analisis Regresi</h1>
+        <p><strong>Data:</strong> Tekanan Darah (Y) dan Umur (X) - 30 Responden</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>No. Resp</th>
+                    <th>Tekanan Darah (Y)</th>
+                    <th>Umur (X)</th>
+                    <th>X²</th>
+                    <th>Y²</th>
+                    <th>XY</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>144</td><td>39</td><td>1521</td><td>20736</td><td>5616</td></tr>
+                <tr><td>2</td><td>220</td><td>47</td><td>2209</td><td>48400</td><td>10340</td></tr>
+                <tr><td>3</td><td>138</td><td>45</td><td>2025</td><td>19044</td><td>6210</td></tr>
+                <tr><td>4</td><td>145</td><td>47</td><td>2209</td><td>21025</td><td>6815</td></tr>
+                <tr><td>5</td><td>162</td><td>65</td><td>4225</td><td>26244</td><td>10530</td></tr>
+                <tr><td>6</td><td>142</td><td>46</td><td>2116</td><td>20164</td><td>6532</td></tr>
+                <tr><td>7</td><td>170</td><td>67</td><td>4489</td><td>28900</td><td>11390</td></tr>
+                <tr><td>8</td><td>124</td><td>42</td><td>1764</td><td>15376</td><td>5208</td></tr>
+                <tr><td>9</td><td>158</td><td>67</td><td>4489</td><td>24964</td><td>10586</td></tr>
+                <tr><td>10</td><td>154</td><td>56</td><td>3136</td><td>23716</td><td>8624</td></tr>
+                <tr><td>11</td><td>162</td><td>64</td><td>4096</td><td>26244</td><td>10368</td></tr>
+                <tr><td>12</td><td>150</td><td>56</td><td>3136</td><td>22500</td><td>8400</td></tr>
+                <tr><td>13</td><td>140</td><td>59</td><td>3481</td><td>19600</td><td>8260</td></tr>
+                <tr><td>14</td><td>110</td><td>34</td><td>1156</td><td>12100</td><td>3740</td></tr>
+                <tr><td>15</td><td>128</td><td>42</td><td>1764</td><td>16384</td><td>5376</td></tr>
+                <tr><td>16</td><td>130</td><td>48</td><td>2304</td><td>16900</td><td>6240</td></tr>
+                <tr><td>17</td><td>135</td><td>45</td><td>2025</td><td>18225</td><td>6075</td></tr>
+                <tr><td>18</td><td>114</td><td>17</td><td>289</td><td>12996</td><td>1938</td></tr>
+                <tr><td>19</td><td>116</td><td>20</td><td>400</td><td>13456</td><td>2320</td></tr>
+                <tr><td>20</td><td>124</td><td>19</td><td>361</td><td>15376</td><td>2356</td></tr>
+                <tr><td>21</td><td>136</td><td>36</td><td>1296</td><td>18496</td><td>4896</td></tr>
+                <tr><td>22</td><td>142</td><td>50</td><td>2500</td><td>20164</td><td>7100</td></tr>
+                <tr><td>23</td><td>120</td><td>39</td><td>1521</td><td>14400</td><td>4680</td></tr>
+                <tr><td>24</td><td>120</td><td>21</td><td>441</td><td>14400</td><td>2520</td></tr>
+                <tr><td>25</td><td>160</td><td>44</td><td>1936</td><td>25600</td><td>7040</td></tr>
+                <tr><td>26</td><td>158</td><td>53</td><td>2809</td><td>24964</td><td>8374</td></tr>
+                <tr><td>27</td><td>144</td><td>63</td><td>3969</td><td>20736</td><td>9072</td></tr>
+                <tr><td>28</td><td>130</td><td>29</td><td>841</td><td>16900</td><td>3770</td></tr>
+                <tr><td>29</td><td>125</td><td>25</td><td>625</td><td>15625</td><td>3125</td></tr>
+                <tr><td>30</td><td>175</td><td>69</td><td>4761</td><td>30625</td><td>12075</td></tr>
+                <tr class="sum-row">
+                    <td><strong>JUMLAH</strong></td>
+                    <td><strong>4315</strong></td>
+                    <td><strong>1368</strong></td>
+                    <td><strong>69164</strong></td>
+                    <td><strong>640120</strong></td>
+                    <td><strong>205596</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="note">
+            <h3>Ringkasan Perhitungan:</h3>
+            <ul>
+                <li><strong>n = 30</strong> (jumlah responden)</li>
+                <li><strong>Σx = 1368</strong> (jumlah umur)</li>
+                <li><strong>Σy = 4315</strong> (jumlah tekanan darah)</li>
+                <li><strong>Σx² = 69164</strong> (jumlah kuadrat umur)</li>
+                <li><strong>Σy² = 640120</strong> (jumlah kuadrat tekanan darah)</li>
+                <li><strong>Σxy = 205596</strong> (jumlah perkalian xy)</li>
+            </ul>
+            <p><em>Data ini siap digunakan untuk perhitungan persamaan regresi linear: y = a + bx</em></p>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <button onclick="exportToExcel()" style="background-color: #4CAF50; color: white; padding: 15px 30px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+                📊 Download Excel File
+            </button>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+        <script>
+            function exportToExcel() {
+                // Data untuk Excel
+                const data = [
+                    ['No. Resp', 'Tekanan Darah (Y)', 'Umur (X)', 'X²', 'Y²', 'XY'],
+                    [1, 144, 39, 1521, 20736, 5616],
+                    [2, 220, 47, 2209, 48400, 10340],
+                    [3, 138, 45, 2025, 19044, 6210],
+                    [4, 145, 47, 2209, 21025, 6815],
+                    [5, 162, 65, 4225, 26244, 10530],
+                    [6, 142, 46, 2116, 20164, 6532],
+                    [7, 170, 67, 4489, 28900, 11390],
+                    [8, 124, 42, 1764, 15376, 5208],
+                    [9, 158, 67, 4489, 24964, 10586],
+                    [10, 154, 56, 3136, 23716, 8624],
+                    [11, 162, 64, 4096, 26244, 10368],
+                    [12, 150, 56, 3136, 22500, 8400],
+                    [13, 140, 59, 3481, 19600, 8260],
+                    [14, 110, 34, 1156, 12100, 3740],
+                    [15, 128, 42, 1764, 16384, 5376],
+                    [16, 130, 48, 2304, 16900, 6240],
+                    [17, 135, 45, 2025, 18225, 6075],
+                    [18, 114, 17, 289, 12996, 1938],
+                    [19, 116, 20, 400, 13456, 2320],
+                    [20, 124, 19, 361, 15376, 2356],
+                    [21, 136, 36, 1296, 18496, 4896],
+                    [22, 142, 50, 2500, 20164, 7100],
+                    [23, 120, 39, 1521, 14400, 4680],
+                    [24, 120, 21, 441, 14400, 2520],
+                    [25, 160, 44, 1936, 25600, 7040],
+                    [26, 158, 53, 2809, 24964, 8374],
+                    [27, 144, 63, 3969, 20736, 9072],
+                    [28, 130, 29, 841, 16900, 3770],
+                    [29, 125, 25, 625, 15625, 3125],
+                    [30, 175, 69, 4761, 30625, 12075],
+                    ['JUMLAH', 4315, 1368, 69164, 640120, 205596],
+                    [],
+                    ['RINGKASAN PERHITUNGAN:', '', '', '', '', ''],
+                    ['n (jumlah responden)', 30, '', '', '', ''],
+                    ['Σx (jumlah umur)', 1368, '', '', '', ''],
+                    ['Σy (jumlah tekanan darah)', 4315, '', '', '', ''],
+                    ['Σx² (jumlah kuadrat umur)', 69164, '', '', '', ''],
+                    ['Σy² (jumlah kuadrat tekanan darah)', 640120, '', '', '', ''],
+                    ['Σxy (jumlah perkalian xy)', 205596, '', '', '', '']
+                ];
+
+                // Membuat workbook dan worksheet
+                const wb = XLSX.utils.book_new();
+                const ws = XLSX.utils.aoa_to_sheet(data);
+
+                // Mengatur lebar kolom
+                ws['!cols'] = [
+                    {wch: 10}, // No. Resp
+                    {wch: 18}, // Tekanan Darah
+                    {wch: 12}, // Umur
+                    {wch: 10}, // X²
+                    {wch: 10}, // Y²
+                    {wch: 10}  // XY
+                ];
+
+                // Menambahkan worksheet ke workbook
+                XLSX.utils.book_append_sheet(wb, ws, "Data Regresi");
+
+                // Membuat file Excel dan download
+                XLSX.writeFile(wb, "Data_Regresi_Tekanan_Darah_Umur.xlsx");
+            }
+        </script>
+    </div>
+</body>
+</html>

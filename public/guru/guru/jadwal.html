@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atur Jadwal - Guru | SISMADU</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f1f1f1;
+      font-family: sans-serif;
+    }
+    .navbar {
+      background-color: #886e58;
+    }
+    .form-container {
+      max-width: 1000px;
+      margin: 30px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+    }
+    .table thead {
+      background-color: #886e58;
+      color: white;
+    }
+    .btn-primary {
+      background-color: #886e58;
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #6f5946;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white fw-bold ms-5" href="#">SISMADU</a>
+    </div>
+  </nav>
+
+  <div class="form-container">
+    <h4 class="fw-bold mb-4">Atur Jadwal Mengajar</h4>
+
+    <form class="row g-3 mb-4">
+      <div class="col-md-4">
+        <label for="mapel" class="form-label">Mata Pelajaran</label>
+        <input type="text" class="form-control" id="mapel" placeholder="Contoh: Matematika">
+      </div>
+      <div class="col-md-4">
+        <label for="kelas" class="form-label">Kelas</label>
+        <input type="text" class="form-control" id="kelas" placeholder="Contoh: 10A">
+      </div>
+      <div class="col-md-4">
+        <label for="hari" class="form-label">Hari</label>
+        <select class="form-select" id="hari">
+          <option>Senin</option>
+          <option>Selasa</option>
+          <option>Rabu</option>
+          <option>Kamis</option>
+          <option>Jumat</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="jamMulai" class="form-label">Jam Mulai</label>
+        <input type="time" class="form-control" id="jamMulai">
+      </div>
+      <div class="col-md-6">
+        <label for="jamSelesai" class="form-label">Jam Selesai</label>
+        <input type="time" class="form-control" id="jamSelesai">
+      </div>
+      <div class="col-12 text-end">
+        <button type="submit" class="btn btn-primary">Tambah Jadwal</button>
+      </div>
+    </form>
+
+    <h5 class="fw-semibold mb-3">Jadwal Mengajar Saat Ini</h5>
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Mata Pelajaran</th>
+          <th>Kelas</th>
+          <th>Hari</th>
+          <th>Jam</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Bahasa Indonesia</td>
+          <td>10B</td>
+          <td>Senin</td>
+          <td>08:00 - 09:40</td>
+          <td>
+            <button class="btn btn-sm btn-warning">Edit</button>
+            <button class="btn btn-sm btn-danger">Hapus</button>
+          </td>
+        </tr>
+        <!-- Tambahkan baris lain dari backend -->
+      </tbody>
+    </table>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

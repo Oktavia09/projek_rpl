@@ -45,6 +45,16 @@ class RegisterController extends Controller
 
         // Tetapkan role 'siswa' secara otomatis
         $user->assignRole('siswa');
+        $user->givePermissionTo([
+            'isi formulir ppdb',
+            'lihat status ppdb',
+            'akses informasi administrasi',
+            'bayar administrasi sekolah',
+            'lihat jadwal kelas',
+            'akses mata pelajaran',
+            'lihat tugas dan pengumuman',
+            'lihat nilai akademik',
+        ]);
 
         // Cek apakah role 'siswa' benar-benar terdaftar
          // Output: true jika role siswa terdaftar, false jika tidak

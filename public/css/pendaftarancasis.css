@@ -1,0 +1,99 @@
+/* Reset dan dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+}
+
+/* Body dan latar belakang */
+body {
+    background-color: #f1f1f1;
+    color: #000;
+}
+
+/* Header form dan judul */
+h3 {
+    color: #b2a496;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #b2a496;
+}
+
+.navbar .navbar-brand {
+    color: #fff;
+}
+
+.navbar .nav-link {
+    color: #fff;
+}
+
+.navbar .nav-link:hover {
+    background-color: #886e58;
+    color: #fff;
+}
+
+/* Container Formulir */
+.form-container {
+    max-width: 950px;
+    margin: auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Input dan Textarea */
+.form-control,
+textarea,
+.form-select {
+    background-color: #f8f9fa;
+    color: #000;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-control:focus,
+textarea:focus,
+.form-select:focus {
+    border-color: #b2a496;
+    box-shadow: 0 0 5px rgba(178, 164, 150, 0.5);
+}
+
+/* Tombol Submit */
+.input-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: #b2a496;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.input-submit:hover {
+    background-color: #886e58;
+}
+
+/* Dropdown (jika digunakan) */
+.dropdown-menu {
+    background-color: #f1f1f1;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #886e58;
+    color: #fff;
+}
+
+/* Footer */
+footer {
+    background-color: #b2a496;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}

@@ -22,36 +22,40 @@ class LoginController extends Controller
     {
         // Validasi input
         $request->validate([
-            'email' => 'required|email',
+            'email'    => 'required|email',
             'password' => 'required|string',
         ]);
 
-        // Coba login menggunakan Auth
+        // Ambil kredensial
         $credentials = $request->only('email', 'password');
 
+        // Coba login
         if (Auth::attempt($credentials)) {
-            // Login berhasil
             $request->session()->regenerate();
 
-            // Dapatkan user yang sedang login
             $user = Auth::user();
 
-            // Arahkan berdasarkan role menggunakan Spatie
-            if ($user->hasRole('siswa')) {
-                return redirect()->route('siswa.dashboard')->with('success', 'Login berhasil sebagai siswa!');
+            // Arahkan sesuai peran/role
+            if ($user->hasRole('admin')) {
+                return redirect()->route('admin.siswa.index')->with('success', 'Login berhasil sebagai Admin!');
+            } elseif ($user->hasRole('siswa')) {
+                return redirect()->route('siswa.home')->with('success', 'Login berhasil sebagai Siswa!');
             } elseif ($user->hasRole('guru')) {
-                return redirect()->route('guru.dashboard')->with('success', 'Login berhasil sebagai guru!');
+                return redirect()->route('guru.dashboard')->with('success', 'Login berhasil sebagai Guru!');
             } else {
-                // Default redirect jika role tidak dikenali
-                return redirect()->intended('/dashboard')->with('success', 'Login berhasil!');
+                Auth::logout();
+                return redirect()->route('login')->withErrors([
+                    'email' => 'Role pengguna tidak dikenali.',
+                ]);
             }
         }
 
-        // Login gagal
+        // Jika gagal login
         return back()->withErrors([
             'email' => 'Email atau password salah.',
         ])->withInput();
     }
+
 
 
     // Fungsi lainnya (bisa dibiarkan kosong atau ditambahkan sesuai kebutuhan)

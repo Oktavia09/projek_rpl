@@ -8,10 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Siswa extends Model
 {
     use HasFactory;
+
+    // Nama tabel di database
     protected $table = 'siswa';
-    public $timestamps = false;
+
+    // Tidak memakai timestamps (created_at & updated_at)
+    public $timestamps = true;
+
+    // Primary key bukan 'id', tapi 'siswa_id'
     protected $primaryKey = 'siswa_id';
 
+    // Kolom yang boleh diisi secara massal
     protected $fillable = [
         'user_id',
         'nama_lengkap',
@@ -20,18 +27,34 @@ class Siswa extends Model
         'tempat_lahir',
         'jenis_kelamin',
         'nomor_telepon',
-        'nama_orang_tua',
-        'pekerjaan_orang_tua',
         'asal_sekolah',
+        'nisn',
         'status_ppdb',
         'dokumen_rapor',
-        'dokumen_akta',
-        'dokumen_foto',
+        'nilai_matematika',
+        'nilai_ipa',
+        'nilai_ips',
+        'nilai_bahasa_indonesia',
+        'nilai_bahasa_inggris',
     ];
 
+    // Format konversi otomatis untuk kolom tertentu
     protected $casts = [
         'tanggal_lahir' => 'date',
-        'tanggal_daftar' => 'datetime',
-        'tanggal_update' => 'datetime',
     ];
+
+    public function presensi()
+    {
+        return $this->hasMany(PresensiSiswa::class, 'siswa_id');
+    }
+
+    public function nilaiTugas()
+    {
+        return $this->hasMany(NilaiTugasSiswa::class, 'siswa_id');
+    }
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'kelas_id');
+    }
 }

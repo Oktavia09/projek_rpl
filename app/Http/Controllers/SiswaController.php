@@ -3,78 +3,125 @@
 namespace App\Http\Controllers;
 
 use App\Models\Siswa;
-
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class SiswaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'role:siswa']);
+        $this->middleware('auth');
+        $this->middleware('role:siswa')->except(['logout']);
+        // $this->middleware('permission:isi formulir ppdb')->only(['store', 'edit', 'update']);
     }
 
     /**
-     * Menampilkan dashboard siswa.
-     *
-     * @return \Illuminate\View\View
-     */
+     * Tampilkan halaman utama siswa dengan data PPDB.
+     *      */
+    public function dashboard_siswa(){
+        $user = Auth::user();
+        $siswa = Siswa::where('user_id', $user->id)->first();
+        return view('siswa.dashboard', compact('siswa'));
+    }
     public function dashboard()
     {
-        $siswa = Auth::user(); // Mendapatkan data siswa yang sedang login
-        $user = User::all();
-        return view('siswa.dashboard', compact('siswa' ,'user'));
+        $siswa = Auth::user();
+        $dataPpdb = Siswa::where('user_id', $siswa->id)->first();
+        return view('siswa.home', compact('siswa', 'dataPpdb'));
     }
 
+    /**
+     * Simpan data pendaftaran PPDB.
+     */
     public function store(Request $request)
     {
-        $request->validate([
+        // Cek apakah sudah pernah mendaftar
+        if (Siswa::where('user_id', Auth::id())->exists()) {
+            return redirect()->route('siswa.home')
+                ->with('error', 'Anda sudah pernah mendaftar PPDB.');
+        }
+
+        // Validasi input
+        $validatedData = $request->validate([
             'nama_lengkap' => 'required|string|max:100',
-            'alamat' => 'required|string',
+            'alamat' => 'required|string|max:500',
             'tanggal_lahir' => 'required|date|before:today',
             'tempat_lahir' => 'required|string|max:50',
             'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
-            'nomor_telepon' => 'required|string|max:15',
-            'nama_orang_tua' => 'required|string|max:100',
-            'pekerjaan_orang_tua' => 'required|string|max:50',
+            'nomor_telepon' => 'required|string|max:15|regex:/^[0-9+\-\s]+$/',
             'asal_sekolah' => 'required|string|max:100',
+            'nisn' => 'required|string|max:20',
+            'nilai_matematika' => 'required|numeric|min:0|max:100',
+            'nilai_ipa' => 'required|numeric|min:0|max:100',
+            'nilai_ips' => 'required|numeric|min:0|max:100',
+            'nilai_bahasa_indonesia' => 'required|numeric|min:0|max:100',
+            'nilai_bahasa_inggris' => 'required|numeric|min:0|max:100',
             'dokumen_rapor' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
-            'dokumen_akta' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
-            'dokumen_foto' => 'required|file|mimes:jpg,jpeg,png|max:1024',
         ]);
 
-        // dd($request->all());
-        $data = $request->all();
-        $data['user_id'] = Auth::id();
-        $data['status_ppdb'] = 'pending';
+        try {
+            $data = $validatedData;
+            $data['user_id'] = Auth::id();
 
-        // Handle file uploads
-        if ($request->hasFile('dokumen_rapor')) {
-            $data['dokumen_rapor'] = $request->file('dokumen_rapor')->store('dokumen/rapor', 'public');
+            // Upload file rapor
+            if ($request->hasFile('dokumen_rapor')) {
+                $data['dokumen_rapor'] = $request->file('dokumen_rapor')
+                    ->store('dokumen/rapor', 'public');
+            }
+
+            // Hitung rata-rata nilai
+            $rataRata = (
+                $data['nilai_matematika'] +
+                $data['nilai_ipa'] +
+                $data['nilai_ips'] +
+                $data['nilai_bahasa_indonesia'] +
+                $data['nilai_bahasa_inggris']
+            ) / 5;
+
+            // Tentukan status berdasarkan rata-rata
+            $data['status_ppdb'] = $rataRata >= 75 ? 'diterima' : 'ditolak';
+
+            // dd($data);
+            // Simpan ke database
+            Siswa::create($data);
+
+            return redirect()->route('siswa.home')
+                ->with('success', 'Pendaftaran PPDB berhasil! Status Anda: ' . strtoupper($data['status_ppdb']));
+
+        } catch (\Exception $e) {
+            // Jika terjadi error, hapus file upload jika ada
+            if (isset($data['dokumen_rapor'])) {
+                Storage::disk('public')->delete($data['dokumen_rapor']);
+            }
+
+            return redirect()->back()->withInput()
+                ->with('error', 'Terjadi kesalahan saat menyimpan data. Silakan coba lagi.');
         }
-
-        if ($request->hasFile('dokumen_akta')) {
-            $data['dokumen_akta'] = $request->file('dokumen_akta')->store('dokumen/akta', 'public');
-        }
-
-        if ($request->hasFile('dokumen_foto')) {
-            $data['dokumen_foto'] = $request->file('dokumen_foto')->store('dokumen/foto', 'public');
-        }
-
-        // dd($data);
-        Siswa::create($data);
-
-        return redirect()->back()->with('success', 'Pendaftaran berhasil!');
     }
 
-    public function logout(Request $request)
+    /**
+     * Tampilkan detail data PPDB (jika ada).
+     */
+    public function show()
     {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        $siswa = Auth::user();
+        $dataPpdb = Siswa::where('user_id', $siswa->id)->first();
 
-        return redirect('/Login'); // arahkan ke halaman login
+        return view('siswa.home', compact('siswa', 'dataPpdb'));
     }
+
+    /**
+     * Tampilkan form edit data PPDB (belum dibuat).
+     */
+    public function edit()
+    {
+        //
+    }
+
+    /**
+     * Tampilkan form edit data PPDB (jika status pending).
+     */
 
 }

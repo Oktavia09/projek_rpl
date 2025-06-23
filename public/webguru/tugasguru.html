@@ -12,6 +12,7 @@
         font-family: sans-serif;
         font-size: 14px;
       }
+
       .navbar {
         background-color: #b2a496;
       }
@@ -32,7 +33,7 @@
       h3 {
         color: #b2a496;
       }
-
+      
       .form-container {
         max-width: 950px;
         margin: auto;
@@ -41,7 +42,7 @@
         border-radius: 10px;
         color: #000;
       }
-
+    
       .form-control, textarea {
         background-color: #f8f9fa;
         color: #000;
@@ -61,7 +62,7 @@
       .input-submit:hover {
         background-color: #886e58;
       }
-
+      
       .navbar {
         background-color: #b2a496;
       }
@@ -69,17 +70,20 @@
       .navbar-nav .nav-item {
         position: relative;
       }
-
+      
       .navbar-nav .nav-link {
         color: white;
-        display: block;
+        display: block; 
       }
-
+      
       .navbar-nav .nav-link:hover {
         background-color: #886e58;
         color: white;
       }
-
+      
+      table tr td {
+        padding: 8px 5px;
+      }
 
     </style>
   </head>
@@ -96,96 +100,66 @@
               <a class="nav-link text-white ms-2" href="#">Dashboard</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white ms-2" href="#">Administrasi</a>
+              <a class="nav-link text-white ms-2" href="#">Jadwal Mengajar</a>
             </li>
-            <li class="nav-item dropdown ms-2">
-              <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Akademik
-              </a>
-              <ul class="dropdown-menu dropdown-menu">
-                <li><a class="dropdown-item" href="#">Jadwal Kelas</a></li>
-                <li><a class="dropdown-item" href="#">Mata Pelajaran</a></li>
-                <li><a class="dropdown-item" href="#">Nilai Tugas</a></li>
-              </ul>
+            <li class="nav-item">
+              <a class="nav-link text-white ms-2" href="#">Unggah Materi & Tugas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white ms-2" href="#">Nilai Siswa</a>
             </li>
           </ul>
         </div>
       </div>
-      <div class="d-flex ms-auto me-4">
-        <div class="nav-item nav-link text-white" style="cursor:pointer;" onclick="logout()">Logout</div>
-      </div>
-
+      
     </nav>
-
-    <div class="wrapper">
+    
+    <div class="wrapper container">
+        <h3 class="pt-5 text-center fw-bold mb-5">MATERI DAN TUGAS SISWA</h3>
         <div class="form-container card mb-4 mt-4">
-          <div class="mt-0 pt-2">
-            <h4>Selamat Datang di SISMADU!</h4>
-            <p>Halo, <b>[Nama Siswa]</b></p>
-            <p>Gunakan dashboard ini untuk melihat informasi penting</p>
-            <p>Semangat belajar dan raih prestasimu!</p>
+        <form>
+          <div class="row mb-3">
+            <div class="col">
+              <label for="mapel" class="form-label">Mata Pelajaran</label>
+              <input type="text" class="form-control" id="mapel" placeholder="Contoh: Matematika">
+            </div>
+            <div class="col">
+              <label for="guru" class="form-label">Nama Guru</label>
+              <input type="text" class="form-control" id="guru" placeholder="Contoh: Bu Siti">
+            </div>
           </div>
-        </div>
-
-        <div class="form-container card mb-4 mt-4">
-            <h5>Biodata Siswa</h5>
-        <div style="width: 100%; height: 1px; background-color: black; margin-bottom: 10px;"></div>
-
-            <table style="width: 100%; border-collapse: collapse;">
-            <tr>
-                <td style="width: 180px;">Nama</td>
-                <td style="width: 10px;">:</td>
-                <td>[Nama Siswa]</td>
-            </tr>
-            <tr>
-                <td>NISN</td>
-                <td>:</td>
-                <td>[NISN]</td>
-            </tr>
-            <tr>
-                <td>Kelas</td>
-                <td>:</td>
-                <td>[Kelas]</td>
-            </tr>
-            <tr>
-                <td>Tempat, Tanggal Lahir</td>
-                <td>:</td>
-                <td>[Tempat, Tanggal Lahir]</td>
-            </tr>
-            <tr>
-                <td>Jenis Kelamin</td>
-                <td>:</td>
-                <td>[Jenis Kelamin]</td>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td>:</td>
-                <td>[Email]</td>
-            </tr>
-            <tr>
-                <td>No. Telepon</td>
-                <td>:</td>
-                <td>[No. Telepon]</td>
-            </tr>
-            <tr>
-                <td>Alamat</td>
-                <td>:</td>
-                <td>[Alamat]</td>
-            </tr>
-            </table>
-
-        </div>
-
-        <div class="text-center p-3" style="background-color: #b2a496;">
-            © 2025 <strong>SISMADU</strong> - All rights reserved.
-        </div>
-        </div>
+      
+          <div class="mb-3">
+            <label for="judulMateri" class="form-label">Judul Materi</label>
+            <input type="text" class="form-control" id="judulMateri" placeholder="Contoh: Aljabar Dasar">
+          </div>
+      
+          <div class="mb-3">
+            <label for="linkMateri" class="form-label">Link/File Materi</label>
+            <input type="text" class="form-control" id="linkMateri" placeholder="Contoh: https://... atau upload file">
+            <input type="file" class="form-control mt-2">
+          </div>
+      
+          <div class="mb-3">
+            <label for="deskripsiTugas" class="form-label">Deskripsi Tugas</label>
+            <textarea class="form-control" id="deskripsiTugas" rows="3" placeholder="Instruksi tugas jika ada..."></textarea>
+          </div>
+      
+          <div class="mb-3">
+            <label for="fileTugas" class="form-label">Upload File Tugas (Opsional)</label>
+            <input type="file" class="form-control" id="fileTugas">
+          </div>
+      
+          <button type="submit" class="btn btn-success">Simpan Materi dan Tugas</button>
+        </form>
+      </div>
+    <div class="text-center p-3" style="background-color: #b2a496;">
+        © 2025 <strong>SISMADU</strong> - All rights reserved.
+    </div>
 
     <script>
-        function logout() {
-            window.location.href = "login.html";
-        }
-        </script>
+        
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
   </body>

@@ -23,3 +23,4 @@ class GuruController extends Controller
         return view('guru.dashboard', compact('guru'));
     }
 }
+
