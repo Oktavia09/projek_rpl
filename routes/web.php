@@ -6,10 +6,13 @@ use App\Http\Controllers\Admin\adminControllerGuru;
 use App\Http\Controllers\Admin\AdminJadwalMengajar;
 use App\Http\Controllers\Admin\KelasSiswaController;
 use App\Http\Controllers\Guru\GuruJadwalController;
+use App\Http\Controllers\Guru\NilaiSiswaController;
 use App\Http\Controllers\Guru\SiswaPrensensiController;
 use App\Http\Controllers\Guru\UploadTugasController;
 use App\Http\Controllers\HomeSiswaController;
+use App\Http\Controllers\Siswa\LihatJadwalController;
 use App\Http\Controllers\Siswa\PresensiSiswaController;
+use App\Http\Controllers\Siswa\TugasSiswaController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
@@ -34,8 +37,8 @@ Route::get('/', function () {
 });
 
 
-Route::get('/Register', [RegisterController::class, 'create'])->name('register.create');
-Route::post('/Register', [RegisterController::class, 'store'])->name('register.store');
+Route::get('/register', [RegisterController::class, 'create'])->name('register.create');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
 Route::get('/Login', [LoginController::class, 'create'])->name('login');
 Route::post('/Login', [LoginController::class, 'store'])->name('login.store');
@@ -63,11 +66,14 @@ Route::middleware(['auth', 'role:siswa'])->prefix('siswa')->name('siswa.')->grou
     route::get('/dashboard-siswa', [SiswaController::class, 'dashboard_siswa'])->name('dashboard_siswa');
 
     Route::resource('presensi-siswa', PresensiSiswaController::class)->names('presensi-siswa');
+    Route::resource('LihatJadwal', LihatJadwalController::class)->names('LihatJadwal');
+    Route::resource('TugasSiswa', TugasSiswaController::class)->names('tugasSiswa');
+
 
 });
 
 
-Route::middleware(['auth', 'role:guru'])->prefix('guru')->name('guru.')->group(function () {
+Route::middleware(['auth', 'role:guru,web'])->prefix('guru')->name('guru.')->group(function () {
     // /guru/dashboard → route name: guru.dashboard
     Route::get('/dashboard', [GuruController::class, 'dashboard'])->name('dashboard');
 
@@ -76,8 +82,7 @@ Route::middleware(['auth', 'role:guru'])->prefix('guru')->name('guru.')->group(f
     ]);
     Route::resource('jadwal_ajar', GuruJadwalController::class)->names('jadwal_ajar');
     Route::resource('presensi-siswa', SiswaPrensensiController::class)->names('presensi-siswa');
-
-
+    Route::resource('CreateNIlai', NilaiSiswaController::class)->names('CreateNilai');
 
 });
 

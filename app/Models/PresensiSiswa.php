@@ -9,6 +9,7 @@ class PresensiSiswa extends Model
 {
     use HasFactory;
     protected $table = 'presensi_siswa';
+    public $timestamps = true;
 
     protected $fillable = [
         'siswa_id',
@@ -28,7 +29,7 @@ class PresensiSiswa extends Model
     // Relasi ke guru
     public function guru()
     {
-        return $this->belongsTo(User::class, 'guru_id');
+        return $this->belongsTo(Guru::class, 'guru_id');
     }
 
     // Relasi ke mata pelajaran

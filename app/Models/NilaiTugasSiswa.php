@@ -7,26 +7,33 @@ use Illuminate\Database\Eloquent\Model;
 
 class NilaiTugasSiswa extends Model
 {
-    use HasFactory;
-    protected $table = 'nilai_tugas';
+    protected $table = 'siswa_tugas';
 
     protected $fillable = [
-        'tugas_id',
         'siswa_id',
-        'file_pengumpulan',
-        'nilai',
+        'tugas_id',
         'tanggal_pengumpulan',
+        'file_jawaban',
+        'jawaban_teks',
+        'nilai',
+        'tanggal_dinilai',
+        'status',
     ];
 
-    // Relasi ke tugas guru
+    /**
+     * Relasi ke model Siswa
+     */
+    public function siswa()
+    {
+        return $this->belongsTo(Siswa::class, 'siswa_id');
+    }
+
+    /**
+     * Relasi ke model TugasGuru (tugas_guru)
+     */
     public function tugas()
     {
         return $this->belongsTo(UploadTugas::class, 'tugas_id');
     }
 
-    // Relasi ke siswa
-    public function siswa()
-    {
-        return $this->belongsTo(Siswa::class, 'siswa_id');
-    }
 }

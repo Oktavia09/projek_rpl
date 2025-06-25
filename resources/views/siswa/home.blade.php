@@ -143,6 +143,8 @@
                         <p><strong>TTL:</strong> {{ $dataPpdb->tempat_lahir }}, {{ $dataPpdb->tanggal_lahir }}</p>
                         <p><strong>Jenis Kelamin:</strong> {{ $dataPpdb->jenis_kelamin }}</p>
                         <p><strong>Asal Sekolah:</strong> {{ $dataPpdb->asal_sekolah }}</p>
+                        <p><strong>Kelas:</strong> {{ $dataPpdb->kelas->nama }}</p>
+
                         <p><strong>NISN:</strong> {{ $dataPpdb->nisn }}</p>
                         <p><strong>No. Telepon:</strong> {{ $dataPpdb->nomor_telepon }}</p>
                         <p><strong>Alamat:</strong> {{ $dataPpdb->alamat }}</p>

@@ -54,4 +54,18 @@ class User extends Authenticatable
     {
         return $this->hasOne(Siswa::class, 'user_id');
     }
+
+    public function guru()
+    {
+        return $this->hasOne(Guru::class, 'user_id');
+    }
+    public function mataPelajaran()
+    {
+        return $this->belongsToMany(
+            MataPelajaran::class,
+            'guru_mapel', // pivot table
+            'guru_id',
+            'mapel_id'
+        );
+    }
 }

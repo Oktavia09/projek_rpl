@@ -14,6 +14,7 @@ class UploadTugas extends Model
     protected $fillable = [
         'guru_id',
         'mapel_id',
+        'kelas_id',
         'judul',
         'deskripsi',
         'file_tugas',
@@ -34,5 +35,10 @@ class UploadTugas extends Model
     public function nilaiTugas()
     {
         return $this->hasMany(NilaiTugasSiswa::class, 'tugas_id');
+    }
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'kelas_id');
     }
 }

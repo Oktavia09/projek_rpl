@@ -182,7 +182,8 @@
                         <a class="nav-link text-white ms-2" href="{{ route('guru.dashboard') }}">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white ms-2" href="{{ route('guru.jadwal_ajar.index') }}">Jadwal Mengajar</a>
+                        <a class="nav-link text-white ms-2" href="{{ route('guru.jadwal_ajar.index') }}">Jadwal
+                            Mengajar</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white ms-2" href="">Unggah Materi & Tugas</a>
@@ -201,9 +202,10 @@
             <div class="card shadow-sm rounded p-4 bg-white">
                 <div class="accordion" id="accordionJadwal">
                     @php $counter = 0; @endphp
-                    @foreach ($jadwal->groupBy('guru.nama_lengkap') as $namaGuru => $jadwalGuru)
+                    @foreach ($semuaGuru as $guru)
                         @php
-                            $isGuruLogin = $guruLogin && $jadwalGuru->first()->guru->id === $guruLogin->id;
+                            $isGuruLogin = $guruLogin && $guru->id === $guruLogin->id;
+                            $jadwalGuru = $guru->jadwalMengajar;
                         @endphp
 
                         <div class="accordion-item mb-2">
@@ -214,7 +216,7 @@
                                     data-bs-target="#collapse{{ $counter }}"
                                     aria-expanded="{{ $counter == 0 ? 'true' : 'false' }}"
                                     aria-controls="collapse{{ $counter }}">
-                                    {{ $namaGuru }} - {{ $jadwalGuru->first()->mataPelajaran->nama ?? '-' }}
+                                    {{ $guru->nama_lengkap }}
                                     @if ($isGuruLogin)
                                         <span class="badge bg-white text-info ms-2">Anda</span>
                                     @endif
@@ -224,15 +226,20 @@
                                 class="accordion-collapse collapse {{ $counter == 0 ? 'show' : '' }}"
                                 aria-labelledby="heading{{ $counter }}" data-bs-parent="#accordionJadwal">
                                 <div class="accordion-body">
-                                    <ul class="mb-0">
-                                        @foreach ($jadwalGuru->sortBy('hari') as $item)
-                                            <li>
-                                                {{ ucfirst($item->hari) }},
-                                                {{ $item->jam_mulai }} - {{ $item->jam_selesai }}
-                                                (Kelas {{ $item->kelas }})
-                                            </li>
-                                        @endforeach
-                                    </ul>
+                                    @if ($jadwalGuru->count() > 0)
+                                        <ul class="mb-0">
+                                            @foreach ($jadwalGuru->sortBy('hari') as $item)
+                                                <li>
+                                                    {{ ucfirst($item->hari) }},
+                                                    {{ $item->jam_mulai }} - {{ $item->jam_selesai }}
+                                                    (Kelas {{ $item->kelas->nama ?? '-' }})
+                                                    - {{ $item->mataPelajaran->nama ?? '-' }}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @else
+                                        <div class="text-muted">Belum memiliki jadwal mengajar</div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

@@ -206,8 +206,13 @@
 
                             <!-- Kelas -->
                             <div class="col-md-4">
-                                <label for="kelas_edit" class="form-label">🏫 Kelas</label>
-                                <input type="text" name="kelas" id="kelas_edit" class="form-control" required>
+                                <select name="kelas_id" class="form-select" required>
+                                    <option value="" selected disabled>-- Pilih Kelas --</option>
+                                    @foreach ($kelas as $k)
+                                        <option value="{{ $k->id }}">{{ $k->nama }} (Tingkat
+                                            {{ $k->tingkat }})</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <!-- Hari -->
@@ -287,7 +292,7 @@
                     console.log('Form data:', new FormData(this));
 
                     // Validasi client-side
-                    const requiredFields = ['guru_id', 'mapel_id', 'kelas', 'hari', 'jam_mulai',
+                    const requiredFields = ['guru_id', 'mapel_id', 'kelas_id', 'hari', 'jam_mulai',
                         'jam_selesai'
                     ];
                     let isValid = true;

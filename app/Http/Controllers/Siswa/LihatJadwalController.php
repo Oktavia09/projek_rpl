@@ -1,33 +1,33 @@
 <?php
 
-namespace App\Http\Controllers\Guru;
+namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
-use App\Models\Guru;
 use App\Models\JadwalMengajar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
-
-class GuruJadwalController extends Controller
+class LihatJadwalController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->middleware(["auth", "role:siswa"]);
+    }
     public function index()
     {
-        // Ambil user login
         $user = Auth::user();
-        $guruLogin = Guru::where('user_id', $user->id)->first();
 
-        // Ambil semua guru dengan jadwalnya (boleh kosong)
-        $semuaGuru = Guru::with(['jadwalMengajar.kelas', 'jadwalMengajar.mataPelajaran'])
-            ->orderBy('nama_lengkap')
+        // Ambil jadwal lengkap dengan relasi guru, mapel, dan kelas
+        $jadwal = JadwalMengajar::with(['guru', 'mataPelajaran', 'kelas'])
+            ->orderBy('jam_mulai') // Urutkan berdasarkan jam mulai agar tersusun rapi
             ->get();
 
-        return view('guru.JadwalMengajar.GuruJadwal', compact('semuaGuru', 'guruLogin'));
+        return view('siswa.LihatJadwal', compact('jadwal', 'user'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -42,7 +42,7 @@ class GuruJadwalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Siswa;
-use App\Models\User;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class SiswaController extends Controller
 {
@@ -20,7 +21,8 @@ class SiswaController extends Controller
     /**
      * Tampilkan halaman utama siswa dengan data PPDB.
      *      */
-    public function dashboard_siswa(){
+    public function dashboard_siswa()
+    {
         $user = Auth::user();
         $siswa = Siswa::where('user_id', $user->id)->first();
         return view('siswa.dashboard', compact('siswa'));
@@ -83,7 +85,20 @@ class SiswaController extends Controller
             // Tentukan status berdasarkan rata-rata
             $data['status_ppdb'] = $rataRata >= 75 ? 'diterima' : 'ditolak';
 
-            // dd($data);
+            // Jika diterima, tempatkan ke kelas berdasarkan kuota dan tingkat 7
+            if ($data['status_ppdb'] === 'diterima') {
+                $kelasTersedia = Kelas::where('tingkat', 7)
+                    ->withCount('siswa')
+                    ->get()
+                    ->filter(fn($kelas) => $kelas->siswa_count < $kelas->kuota)
+                    ->sortBy('nama')
+                    ->first();
+
+                if ($kelasTersedia) {
+                    $data['kelas_id'] = $kelasTersedia->id;
+                }
+            }
+
             // Simpan ke database
             Siswa::create($data);
 
@@ -93,13 +108,14 @@ class SiswaController extends Controller
         } catch (\Exception $e) {
             // Jika terjadi error, hapus file upload jika ada
             if (isset($data['dokumen_rapor'])) {
-                Storage::disk('public')->delete($data['dokumen_rapor']);
+                \Storage::disk('public')->delete($data['dokumen_rapor']);
             }
 
             return redirect()->back()->withInput()
                 ->with('error', 'Terjadi kesalahan saat menyimpan data. Silakan coba lagi.');
         }
     }
+
 
     /**
      * Tampilkan detail data PPDB (jika ada).

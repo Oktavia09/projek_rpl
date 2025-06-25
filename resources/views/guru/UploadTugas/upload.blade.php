@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SISMADU</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/lightbox2@2/dist/css/lightbox.min.css" rel="stylesheet">
     <style>
         body {
             background-color: #f8f9fa;
@@ -75,10 +76,12 @@
                         <a class="nav-link text-white ms-2" href="{{ route('guru.dashboard') }}">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white ms-2" href="{{ route('guru.jadwal_ajar.index') }}">Jadwal Mengajar</a>
+                        <a class="nav-link text-white ms-2" href="{{ route('guru.jadwal_ajar.index') }}">Jadwal
+                            Mengajar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white ms-2" href="{{ route('guru.tugas.index') }}">Unggah Materi & Tugas</a>
+                        <a class="nav-link text-white ms-2" href="{{ route('guru.tugas.index') }}">Unggah Materi &
+                            Tugas</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="#">Nilai Siswa</a></li>
                 </ul>
@@ -104,6 +107,7 @@
                         <tr>
                             <th>Judul</th>
                             <th>Mapel</th>
+                            <th>Kelas</th>
                             <th>Tanggal Dibuat</th>
                             <th>type</th>
                             <th>Deadline</th>
@@ -112,20 +116,49 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            function getExtension($filename)
+                            {
+                                return strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+                            }
+                        @endphp
                         @foreach ($tugas as $item)
                             <tr>
                                 <td>{{ $item->judul }}</td>
                                 <td>{{ $item->mapel->nama }}</td>
+                                <td>{{ $item->kelas->nama ?? '-' }} (Tingkat {{ $item->kelas->tingkat ?? '-' }})</td>
                                 <td>{{ $item->created_at->format('d-m-Y') }}</td>
                                 <td>{{ ucfirst($item->type) }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->deadline)->format('d-m-Y') }}</td>
                                 <td>
                                     @if ($item->file_tugas)
-                                        <a href="{{ asset('storage/' . $item->file_tugas) }}" target="_blank">Lihat</a>
+                                        @php
+                                            $url = url('storage/' . $item->file_tugas);
+                                            $ext = pathinfo($item->file_tugas, PATHINFO_EXTENSION);
+                                        @endphp
+
+                                        @if (in_array(strtolower($ext), ['jpg', 'jpeg', 'png', 'gif']))
+                                            <a href="{{ $url }}" data-lightbox="preview"
+                                                data-title="File Tugas">
+                                                <img src="{{ $url }}" style="max-width: 100px;"
+                                                    alt="Preview">
+                                            </a>
+                                        @elseif ($ext === 'pdf')
+                                            <a href="{{ $url }}" target="_blank"
+                                                class="btn btn-sm btn-outline-primary">Lihat PDF</a>
+                                        @elseif (in_array($ext, ['doc', 'docx']))
+                                            <a href="https://view.officeapps.live.com/op/view.aspx?src={{ urlencode($url) }}"
+                                                target="_blank" class="btn btn-sm btn-outline-success">Lihat DOC</a>
+                                        @else
+                                            <a href="{{ $url }}" target="_blank"
+                                                class="btn btn-sm btn-outline-secondary">Download File</a>
+                                        @endif
                                     @else
-                                        -
+                                        <span class="text-muted">Tidak ada file</span>
                                     @endif
+
                                 </td>
+
                                 <td>
                                     <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
                                         data-bs-target="#modalEditTugas{{ $item->id }}">Edit</button>
@@ -162,18 +195,35 @@
                                                     </select>
                                                 </div>
                                                 <div class="mb-3">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Kelas</label>
+                                                        <select name="kelas_id" class="form-select" required>
+                                                            <option value="">-- Pilih Kelas --</option>
+                                                            @foreach ($kelasList as $kelas)
+                                                                <option value="{{ $kelas->id }}"
+                                                                    {{ $item->kelas_id == $kelas->id ? 'selected' : '' }}>
+                                                                    {{ $kelas->nama }} - Tingkat
+                                                                    {{ $kelas->tingkat }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
                                                     <label class="form-label">Judul</label>
                                                     <input type="text" name="judul" class="form-control"
-                                                    value="{{ $item->judul }}" required>
+                                                        value="{{ $item->judul }}" required>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label">type</label>
 
                                                     <select name="type" class="form-select" required>
                                                         <option value="tugas"
-                                                            {{ $item->type == 'tugas' ? 'selected' : '' }}>Tugas</option>
+                                                            {{ $item->type == 'tugas' ? 'selected' : '' }}>Tugas
+                                                        </option>
                                                         <option value="materi"
-                                                            {{ $item->type == 'materi' ? 'selected' : '' }}>Materi</option>
+                                                            {{ $item->type == 'materi' ? 'selected' : '' }}>Materi
+                                                        </option>
                                                     </select>
                                                 </div>
                                                 <div class="mb-3">
@@ -232,6 +282,16 @@
                             </select>
                         </div>
                         <div class="mb-3">
+
+                            <select name="kelas_id" class="form-select" required>
+                                <option value="">-- Pilih Kelas --</option>
+                                @foreach ($kelasList as $kelas)
+                                    <option value="{{ $kelas->id }}">{{ $kelas->nama }} - Tingkat
+                                        {{ $kelas->tingkat }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label">Judul</label>
                             <input type="text" name="judul" class="form-control" required>
                         </div>
@@ -272,6 +332,7 @@
 
     <!-- Bootstrap Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightbox2@2/dist/js/lightbox-plus-jquery.min.js"></script>
 </body>
 
 </html>
